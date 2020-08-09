@@ -6,7 +6,7 @@ print("Inicio do programalho")
 
 if len(sys.argv) < 3:
     print("Usage listdir sourceDir backupDir [onlyNotFound] [copyMissingDir]")
-    sys.exit(1)
+    sys.exit()
 else:
     originPath = sys.argv[1]
     backupPath = sys.argv[2]
