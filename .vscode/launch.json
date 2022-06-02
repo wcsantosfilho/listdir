@@ -14,6 +14,14 @@
             "console": "integratedTerminal"
         },
         {
+            "name": "Python: Arquivo Atual com args",
+            "type": "python",
+            "request": "launch",
+            "args": ["/Volumes/FreeAgent GoFlex Drive/Pictures"],
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },
+        {
             "name": "Python: Listfile onlyNotFound",
             "type": "python",
             "request": "launch",
