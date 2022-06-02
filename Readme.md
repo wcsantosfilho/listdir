@@ -4,6 +4,15 @@ lista, compara e copia diretórios
 # listfile
 lista, compara e copia arquivos
 
+# DboxListFile
+Verifica e faz download do Dropbox para o dispositivo de backup
+Usa arquivo "config.py":
+    ```
+    photo_root_folder = '/MeusDocs/Photos'
+    dbox_dev_token = 'YOUR_TOKEN_HERE'
+    ```
+
+
 Uso:
 #### python listdir.py pathOrigen pathBackup \[onlyNotFound\] \[copyMissingDir\]
 
