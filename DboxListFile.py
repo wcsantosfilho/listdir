@@ -4,8 +4,13 @@ import os
 import sys  
 import argparse
 import locale
+from pygame import mixer
+mixer.init()
+sound=mixer.Sound("/home/wfilho/.local/lib/python3.6/site-packages/pygame/examples/data/boom.wav")
+sound.play(loops=1)
 
 print(locale.getpreferredencoding())
+
 
 """for entry in dbx.files_list_folder(config.photo_root_file).entries:
     print(entry.name)
@@ -24,9 +29,9 @@ def main():
 
     local_folder = args.local_folder
     if os.path.exists(local_folder):
-        print('Yeah! The local folder does exists!')
+        print('Yeah! The local folder', local_folder, ' does exists!')
     else:
-        print("Bad news! Local folder doesn't exists!")
+        print('Bad news! Local folder', local_folder, ' does not exists!')
         exit(2)
 
     folder_counting = 0
@@ -43,6 +48,9 @@ def main():
                 # print('Backup  folder:', localfolder)
                 if not (os.path.exists(local_entry_folder)):
                     print('Precisa download: ', dropbox_folder)
+                    mixer.init()
+                    sound=mixer.Sound("/home/wfilho/.local/lib/python3.6/site-packages/pygame/examples/data/boom.wav")
+                    sound.play(loops=1)
                     print("Continua? (s/n)")
                     x = input()
                     if (x == "n"):
@@ -72,9 +80,11 @@ def download_folder_contents(dbx, dropbox_folder, local_folder):
             dropbox_list_file_result = dbx.files_list_folder_continue(dropbox_list_file_result.cursor)
     except dropbox.exceptions.HttpError as err:
         print('*** Http error:', err)
+        exit(2)
         return None
     except OSError as err:
         print('*** OS Error:', err)
+        exit(2)
         return None
     return file_counting
 
