@@ -40,7 +40,7 @@ def main():
                 # print('Backup  folder:', localfolder)
                 if not (os.path.exists(local_entry_folder)):
                     print('Precisa download: ', dropbox_folder)
-                    download_folder_contents(dbx, dropbox_entry)
+                    download_folder_contents(dbx, dropbox_entry, local_folder)
             dropbox_list_result = dbx.files_list_folder_continue(dropbox_list_result.cursor)
     except dropbox.exceptions.ApiError as err:
         print('Folder listing failed for', dropbox_root , '-- assumed empty:', err)
@@ -49,20 +49,19 @@ def main():
         print('Has more? ', dropbox_list_result.has_more)
     dbx.close()
 
-def download_folder_contents(dbx, folder):
+def download_folder_contents(dbx, dropbox_folder, local_folder):
     try:
-        basedir = '/Users/wcsantosfilho/Downloads/'
-        newdir = basedir + folder.name
+        local_folder = local_folder + '/' if local_folder[:-1] != '/' else local_folder
+        newdir = local_folder + dropbox_folder.name
         os.mkdir(newdir)
         file_counting = 0
-        dropbox_list_file_result = dbx.files_list_folder(folder.path_lower)
+        dropbox_list_file_result = dbx.files_list_folder(dropbox_folder.path_lower)
         while len(dropbox_list_file_result.entries) > 0:
             for dropbox_file in dropbox_list_file_result.entries:
                 file_counting +=1
-                # xxzz = dbx.files_download(dropbox_file.path_display)
-                kpo = dropbox_file.path_lower
-                zpo = newdir + '/' + dropbox_file.name
-                zzxx = dbx.files_download_to_file(zpo, kpo)
+                dropbox_file_path = dropbox_file.path_lower
+                local_file_path = newdir + '/' + dropbox_file.name
+                zzxx = dbx.files_download_to_file(local_file_path, dropbox_file_path)
             dropbox_list_file_result = dbx.files_list_folder_continue(dropbox_list_file_result.cursor)
     except dropbox.exceptions.HttpError as err:
         print('*** Http error:', err)
