@@ -2,7 +2,7 @@ import os
 import sys  
 from distutils.file_util import copy_file
 
-print("Inicio do programalho")
+print("Inicio do programalho!")
 
 if len(sys.argv) < 3:
     print("Usage listfile sourceDir backupDir [onlyNotFound] [copyMissingFiles]")
