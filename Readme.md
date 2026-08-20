@@ -35,5 +35,5 @@ Exemplos:
 
 Observação: Tanto _listdir_ quanto _listfile_ verificam apenas um nível de diretórios abaixo do diretório informado.
 
-
+Atenção:
 Executado a última vez com python 3.8.5
